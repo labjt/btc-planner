@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BTC Planner - Advanced</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white font-sans flex items-center justify-center min-h-screen py-12">
+
+    <div class="bg-gray-800 rounded-lg shadow-xl p-8 max-w-4xl w-full">
+
+        <div class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-orange-500">BTC Planner</h1>
+            <p class="text-gray-400 mt-2">Project your long-term net worth on a Bitcoin standard.</p>
+        </div>
+
+        <!-- Inputs Section -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            
+            <!-- Your Finances -->
+            <div class="bg-gray-700 p-4 rounded-lg">
+                <h2 class="text-xl font-semibold mb-3 text-gray-300">Finances</h2>
+                <label for="annualIncome" class="block text-sm font-medium text-gray-400">Annual Income ($)</label>
+                <input type="number" id="annualIncome" value="120000" class="mt-1 block w-full bg-gray-600 border-gray-500 rounded-md shadow-sm py-2 px-3 text-white focus:outline-none focus:ring-orange-500 focus:border-orange-500">
+                
+                <label for="monthlyExpenses" class="block text-sm font-medium text-gray-400 mt-4">Monthly Expenses ($)</label>
+                <input type="number" id="monthlyExpenses" value="5000" class="mt-1 block w-full bg-gray-600 border-gray-500 rounded-md shadow-sm py-2 px-3 text-white focus:outline-none focus:ring-orange-500 focus:border-orange-500">
+
+                <label for="traditionalGrowthRate" class="block text-sm font-medium text-gray-400 mt-4">Traditional Growth Rate (%)</label>
+                <input type="number" id="traditionalGrowthRate" value="5" class="mt-1 block w-full bg-gray-600 border-gray-500 rounded-md shadow-sm py-2 px-3 text-white focus:outline-none focus:ring-orange-500 focus:border-orange-500">
+            </div>
+
+            <!-- Assumptions -->
+            <div class="bg-gray-700 p-4 rounded-lg">
+                <h2 class="text-xl font-semibold mb-3 text-gray-300">Taxes & Growth</h2>
+                <label for="incomeTaxRate" class="block text-sm font-medium text-gray-400">Income Tax Rate (%)</label>
+                <input type="number" id="incomeTaxRate" value="30" class="mt-1 block w-full bg-gray-600 border-gray-500 rounded-md shadow-sm py-2 px-3 text-white focus:outline-none focus:ring-orange-500 focus:border-orange-500">
+                
+                <label for="capitalGainsRate" class="block text-sm font-medium text-gray-400 mt-4">Capital Gains Rate (%)</label>
+                <input type="number" id="capitalGainsRate" value="20" class="mt-1 block w-full bg-gray-600 border-gray-500 rounded-md shadow-sm py-2 px-3 text-white focus:outline-none focus:ring-orange-500 focus:border-orange-500">
+                
+                <label for="btcGrowthRate" class="block text-sm font-medium text-gray-400 mt-4">BTC Annual Growth (%)</label>
+                <input type="number" id="btcGrowthRate" value="60" class="mt-1 block w-full bg-gray-600 border-gray-500 rounded-md shadow-sm py-2 px-3 text-white focus:outline-none focus:ring-orange-500 focus:border-orange-500">
+            </div>
+
+            <!-- Simulation Control -->
+            <div class="bg-gray-700 p-4 rounded-lg">
+                <h2 class="text-xl font-semibold mb-3 text-gray-300">Simulation</h2>
+                <label for="simulationYears" class="block text-sm font-medium text-gray-400">Number of Years</label>
+                <input type="number" id="simulationYears" value="10" class="mt-1 block w-full bg-gray-600 border-gray-500 rounded-md shadow-sm py-2 px-3 text-white focus:outline-none focus:ring-orange-500 focus:border-orange-500">
+                
+                <button id="calculateBtn" class="w-full mt-8 bg-orange-600 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-lg shadow-lg transition-transform transform hover:scale-105">
+                    Run Projection
+                </button>
+            </div>
+        </div>
+
+        <!-- Results Section -->
+        <div id="results" class="mt-10" style="display: none;">
+            <!-- Multi-Year Projection Table -->
+            <h2 class="text-2xl font-semibold mb-4 text-gray-300 text-center">Multi-Year Projection</h2>
+            <div class="overflow-x-auto rounded-lg">
+                <table class="min-w-full bg-gray-700">
+                    <thead class="bg-gray-600">
+                        <tr>
+                            <th class="py-3 px-4 text-left">Year</th>
+                            <th class="py-3 px-4 text-left">Traditional Net Worth</th>
+                            <th class="py-3 px-4 text-left">Bitcoin Standard Net Worth</th>
+                            <th class="py-3 px-4 text-left">Difference</th>
+                        </tr>
+                    </thead>
+                    <tbody id="projectionTableBody">
+                        <!-- JS will populate this -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Final Year Breakdown -->
+            <h2 class="text-2xl font-semibold mt-10 mb-4 text-gray-300 text-center">Breakdown of Final Year</h2>
+            <div id="finalYearBreakdown" class="grid grid-cols-1 md:grid-cols-2 gap-6 bg-gray-700 p-6 rounded-lg">
+                <!-- JS will populate this -->
+            </div>
+        </div>
+
+    </div>
+
+    <script src="main.js"></script>
+
+</body>
+</html>
