@@ -3,89 +3,167 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BTC Planner - Advanced</title>
+    <title>BTC Planner - Pro</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body class="bg-gray-900 text-white font-sans flex items-center justify-center min-h-screen py-12">
-
     <div class="bg-gray-800 rounded-lg shadow-xl p-8 max-w-4xl w-full">
-
+        <!-- Main HTML Structure -->
         <div class="text-center mb-8">
             <h1 class="text-4xl font-bold text-orange-500">BTC Planner</h1>
-            <p class="text-gray-400 mt-2">Project your long-term net worth on a Bitcoin standard.</p>
+            <p class="text-gray-400 mt-2">A professional tool for long-term Bitcoin standard financial projection.</p>
         </div>
-
-        <!-- Inputs Section -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            
-            <!-- Your Finances -->
-            <div class="bg-gray-700 p-4 rounded-lg">
-                <h2 class="text-xl font-semibold mb-3 text-gray-300">Finances</h2>
-                <label for="annualIncome" class="block text-sm font-medium text-gray-400">Annual Income ($)</label>
-                <input type="number" id="annualIncome" value="120000" class="mt-1 block w-full bg-gray-600 border-gray-500 rounded-md shadow-sm py-2 px-3 text-white focus:outline-none focus:ring-orange-500 focus:border-orange-500">
-                
-                <label for="monthlyExpenses" class="block text-sm font-medium text-gray-400 mt-4">Monthly Expenses ($)</label>
-                <input type="number" id="monthlyExpenses" value="5000" class="mt-1 block w-full bg-gray-600 border-gray-500 rounded-md shadow-sm py-2 px-3 text-white focus:outline-none focus:ring-orange-500 focus:border-orange-500">
-
-                <label for="traditionalGrowthRate" class="block text-sm font-medium text-gray-400 mt-4">Traditional Growth Rate (%)</label>
-                <input type="number" id="traditionalGrowthRate" value="5" class="mt-1 block w-full bg-gray-600 border-gray-500 rounded-md shadow-sm py-2 px-3 text-white focus:outline-none focus:ring-orange-500 focus:border-orange-500">
+            <div class="bg-gray-700 p-4 rounded-lg space-y-4">
+                <h2 class="text-xl font-semibold text-gray-300">Your Finances</h2>
+                <div data-input-id="annualIncome"><label for="annualIncome" class="block text-sm font-medium text-gray-400">Annual Income ($)</label><input type="number" id="annualIncome" value="120000" class="mt-1 block w-full bg-gray-600 rounded-md p-2"></div>
+                <div data-input-id="monthlyExpenses"><label for="monthlyExpenses" class="block text-sm font-medium text-gray-400">Monthly Expenses ($)</label><input type="number" id="monthlyExpenses" value="5000" class="mt-1 block w-full bg-gray-600 rounded-md p-2"></div>
+                <div data-input-id="salaryGrowthRate"><label for="salaryGrowthRate" class="block text-sm font-medium text-gray-400">Annual Salary Growth (%)</label><input type="number" id="salaryGrowthRate" value="3" class="mt-1 block w-full bg-gray-600 rounded-md p-2"></div>
+                <div data-input-id="inflationRate"><label for="inflationRate" class="block text-sm font-medium text-gray-400">Annual Inflation (%)</label><input type="number" id="inflationRate" value="2" class="mt-1 block w-full bg-gray-600 rounded-md p-2"></div>
             </div>
-
-            <!-- Assumptions -->
-            <div class="bg-gray-700 p-4 rounded-lg">
-                <h2 class="text-xl font-semibold mb-3 text-gray-300">Taxes & Growth</h2>
-                <label for="incomeTaxRate" class="block text-sm font-medium text-gray-400">Income Tax Rate (%)</label>
-                <input type="number" id="incomeTaxRate" value="30" class="mt-1 block w-full bg-gray-600 border-gray-500 rounded-md shadow-sm py-2 px-3 text-white focus:outline-none focus:ring-orange-500 focus:border-orange-500">
-                
-                <label for="capitalGainsRate" class="block text-sm font-medium text-gray-400 mt-4">Capital Gains Rate (%)</label>
-                <input type="number" id="capitalGainsRate" value="20" class="mt-1 block w-full bg-gray-600 border-gray-500 rounded-md shadow-sm py-2 px-3 text-white focus:outline-none focus:ring-orange-500 focus:border-orange-500">
-                
-                <label for="btcGrowthRate" class="block text-sm font-medium text-gray-400 mt-4">BTC Annual Growth (%)</label>
-                <input type="number" id="btcGrowthRate" value="60" class="mt-1 block w-full bg-gray-600 border-gray-500 rounded-md shadow-sm py-2 px-3 text-white focus:outline-none focus:ring-orange-500 focus:border-orange-500">
+            <div class="bg-gray-700 p-4 rounded-lg space-y-4">
+                <h2 class="text-xl font-semibold text-gray-300">Taxes & Growth</h2>
+                <div data-input-id="incomeTaxRate"><label for="incomeTaxRate" class="block text-sm font-medium text-gray-400">Income / Short-Term Gains Rate (%)</label><input type="number" id="incomeTaxRate" value="30" class="mt-1 block w-full bg-gray-600 rounded-md p-2"></div>
+                <div data-input-id="longTermGainsRate"><label for="longTermGainsRate" class="block text-sm font-medium text-gray-400">Long-Term Gains Rate (%)</label><input type="number" id="longTermGainsRate" value="20" class="mt-1 block w-full bg-gray-600 rounded-md p-2"></div>
+                <div data-input-id="traditionalGrowthRate"><label for="traditionalGrowthRate" class="block text-sm font-medium text-gray-400">Traditional Growth (%)</label><input type="number" id="traditionalGrowthRate" value="5" class="mt-1 block w-full bg-gray-600 rounded-md p-2"></div>
+                <div data-input-id="btcGrowthRate"><label for="btcGrowthRate" class="block text-sm font-medium text-gray-400">BTC Annual Growth (%)</label><input type="number" id="btcGrowthRate" value="60" class="mt-1 block w-full bg-gray-600 rounded-md p-2"></div>
             </div>
-
-            <!-- Simulation Control -->
-            <div class="bg-gray-700 p-4 rounded-lg">
-                <h2 class="text-xl font-semibold mb-3 text-gray-300">Simulation</h2>
-                <label for="simulationYears" class="block text-sm font-medium text-gray-400">Number of Years</label>
-                <input type="number" id="simulationYears" value="10" class="mt-1 block w-full bg-gray-600 border-gray-500 rounded-md shadow-sm py-2 px-3 text-white focus:outline-none focus:ring-orange-500 focus:border-orange-500">
-                
-                <button id="calculateBtn" class="w-full mt-8 bg-orange-600 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-lg shadow-lg transition-transform transform hover:scale-105">
-                    Run Projection
-                </button>
+            <div class="bg-gray-700 p-4 rounded-lg flex flex-col justify-between">
+                <div><h2 class="text-xl font-semibold mb-4">Simulation</h2><div data-input-id="simulationYears"><label for="simulationYears" class="block text-sm font-medium text-gray-400">Number of Years</label><input type="number" id="simulationYears" value="10" class="mt-1 block w-full bg-gray-600 rounded-md p-2"></div></div>
+                <button id="calculateBtn" class="w-full mt-4 bg-orange-600 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-lg">Run Projection</button>
             </div>
         </div>
-
-        <!-- Results Section -->
-        <div id="results" class="mt-10" style="display: none;">
-            <!-- Multi-Year Projection Table -->
-            <h2 class="text-2xl font-semibold mb-4 text-gray-300 text-center">Multi-Year Projection</h2>
-            <div class="overflow-x-auto rounded-lg">
-                <table class="min-w-full bg-gray-700">
-                    <thead class="bg-gray-600">
-                        <tr>
-                            <th class="py-3 px-4 text-left">Year</th>
-                            <th class="py-3 px-4 text-left">Traditional Net Worth</th>
-                            <th class="py-3 px-4 text-left">Bitcoin Standard Net Worth</th>
-                            <th class="py-3 px-4 text-left">Difference</th>
-                        </tr>
-                    </thead>
-                    <tbody id="projectionTableBody">
-                        <!-- JS will populate this -->
-                    </tbody>
-                </table>
-            </div>
-
-            <!-- Final Year Breakdown -->
-            <h2 class="text-2xl font-semibold mt-10 mb-4 text-gray-300 text-center">Breakdown of Final Year</h2>
-            <div id="finalYearBreakdown" class="grid grid-cols-1 md:grid-cols-2 gap-6 bg-gray-700 p-6 rounded-lg">
-                <!-- JS will populate this -->
-            </div>
+        <div id="results" class="mt-10 space-y-10" style="display: none;">
+            <div><h2 class="text-2xl font-semibold mb-4 text-center">Net Worth Projection</h2><div class="bg-gray-700 p-4 rounded-lg"><canvas id="projectionChart"></canvas></div></div>
+            <div><h2 class="text-2xl font-semibold mb-4 text-center">Cumulative Simulation Summary</h2><div class="overflow-x-auto rounded-lg bg-gray-700 p-4"><table class="min-w-full"><thead class="bg-gray-600"><tr><th class="py-3 px-4 text-left">Metric</th><th class="py-3 px-4 text-right">Traditional Model</th><th class="py-3 px-4 text-right">Bitcoin Model</th></tr></thead><tbody id="cumulativeSummaryBody" class="divide-y divide-gray-600"></tbody></table></div></div>
+            <div><h2 class="text-2xl font-semibold mb-4 text-center">Year-by-Year Breakdown</h2><div class="overflow-x-auto rounded-lg"><table class="min-w-full bg-gray-700"><thead class="bg-gray-600"><tr><th class="py-3 px-4 text-left">Year</th><th class="py-3 px-4 text-left">Traditional Net Worth</th><th class="py-3 px-4 text-left">Bitcoin Standard Net Worth</th><th class="py-3 px-4 text-left">Difference</th></tr></thead><tbody id="projectionTableBody"></tbody></table></div></div>
+            <div><h2 class="text-2xl font-semibold mb-4 text-center">Breakdown of Final Year</h2><div id="finalYearBreakdown" class="grid grid-cols-1 md:grid-cols-2 gap-6 bg-gray-700 p-6 rounded-lg"></div></div>
+            <div><h2 class="text-2xl font-semibold mb-4 text-center">Share Your Scenario</h2><div class="flex gap-2"><input type="text" id="shareableLink" class="w-full bg-gray-600 rounded-md p-2 text-gray-300" readonly><button id="copyLinkBtn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg">Copy</button></div></div>
         </div>
-
     </div>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const el = id => document.getElementById(id);
+    const val = id => parseFloat(el(id).value);
+    const formatter = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0 });
+    let projectionChart = null;
 
-    <script src="main.js"></script>
+    const inputIds = [
+        'annualIncome', 'monthlyExpenses', 'salaryGrowthRate', 'inflationRate', 
+        'incomeTaxRate', 'longTermGainsRate', 'traditionalGrowthRate', 'btcGrowthRate', 'simulationYears'
+    ];
 
+    function runSimulation() {
+        try {
+            const inputs = {};
+            inputIds.forEach(id => inputs[id] = val(id));
+
+            let trad = { netWorth: 0, longTermCapital: 0 };
+            let btc = { netWorth: 0, longTermCapital: 0 };
+            let cumulative = { grossIncome: 0, incomeTax: 0, expenses: 0, investedSavings: 0, tradTax: 0, btcTax: 0, tradGrowth: 0, btcGrowth: 0 };
+
+            el('projectionTableBody').innerHTML = '';
+            el('cumulativeSummaryBody').innerHTML = '';
+            
+            const chartData = { labels: [], trad: [], btc: [] };
+            let finalBreakdownHTML = '';
+
+            for (let year = 1; year <= inputs.simulationYears; year++) {
+                const currentIncome = inputs.annualIncome * Math.pow(1 + inputs.salaryGrowthRate / 100, year - 1);
+                const currentExpenses = (inputs.monthlyExpenses * 12) * Math.pow(1 + inputs.inflationRate / 100, year - 1);
+                const incomeTax = currentIncome * (inputs.incomeTaxRate / 100);
+                const netIncome = currentIncome - incomeTax;
+                const savings = netIncome - currentExpenses;
+
+                cumulative.grossIncome += currentIncome;
+                cumulative.incomeTax += incomeTax;
+                cumulative.expenses += currentExpenses;
+                cumulative.investedSavings += savings;
+
+                const startOfYearTrad = trad.netWorth;
+                const tradLongTermGrowth = trad.longTermCapital * (inputs.traditionalGrowthRate / 100);
+                const tradShortTermGrowth = savings * (inputs.traditionalGrowthRate / 100);
+                const tradLongTermTax = tradLongTermGrowth * (inputs.longTermGainsRate / 100);
+                const tradShortTermTax = tradShortTermGrowth * (inputs.incomeTaxRate / 100); // Using income rate for ST
+                trad.netWorth += savings + tradLongTermGrowth + tradShortTermGrowth - tradLongTermTax - tradShortTermTax;
+                trad.longTermCapital = trad.netWorth; // All becomes long-term for the next year
+                cumulative.tradGrowth += tradLongTermGrowth + tradShortTermGrowth;
+                cumulative.tradTax += tradLongTermTax + tradShortTermTax;
+
+                const startOfYearBtc = btc.netWorth;
+                const btcLongTermGrowth = btc.longTermCapital * (inputs.btcGrowthRate / 100);
+                const btcShortTermGrowth = savings * (inputs.btcGrowthRate / 100);
+                const btcLongTermTax = btcLongTermGrowth * (inputs.longTermGainsRate / 100);
+                const btcShortTermTax = btcShortTermGrowth * (inputs.incomeTaxRate / 100); // Using income rate for ST
+                btc.netWorth += savings + btcLongTermGrowth + btcShortTermGrowth - btcLongTermTax - btcShortTermTax;
+                btc.longTermCapital = btc.netWorth; // All becomes long-term for the next year
+                cumulative.btcGrowth += btcLongTermGrowth + btcShortTermGrowth;
+                cumulative.btcTax += btcLongTermTax + btcShortTermTax;
+
+                chartData.labels.push(`Year ${year}`);
+                chartData.trad.push(trad.netWorth);
+                chartData.btc.push(btc.netWorth);
+                const difference = btc.netWorth - trad.netWorth;
+                el('projectionTableBody').innerHTML += `<tr class="border-b border-gray-600"><td class="py-2 px-4">${year}</td><td class="py-2 px-4">${formatter.format(trad.netWorth)}</td><td class="py-2 px-4 font-semibold text-green-400">${formatter.format(btc.netWorth)}</td><td class="py-2 px-4 text-orange-400">${formatter.format(difference)}</td></tr>`;
+                
+                if (year === inputs.simulationYears) {
+                    const finalTradGrowth = tradLongTermGrowth + tradShortTermGrowth;
+                    const finalTradTax = tradLongTermTax + tradShortTermTax;
+                    const finalBtcGrowth = btcLongTermGrowth + btcShortTermGrowth;
+                    const finalBtcTax = btcLongTermTax + btcShortTermTax;
+                    finalBreakdownHTML = `<div><h3 class="text-lg font-semibold text-gray-400">Traditional Model (Final Year)</h3><p>Starting Principal: <span class="font-mono float-right">${formatter.format(startOfYearTrad)}</span></p><p>Annual Savings Added: <span class="font-mono float-right">+ ${formatter.format(savings)}</span></p><p>Investment Growth: <span class="font-mono float-right text-green-400">+ ${formatter.format(finalTradGrowth)}</span></p><p class="font-semibold">Capital Gains Tax Paid: <span class="font-mono float-right text-red-400">- ${formatter.format(finalTradTax)}</span></p><hr class="border-gray-500 my-2"><p>Final Net Worth: <span class="font-mono float-right font-bold">${formatter.format(trad.netWorth)}</span></p></div><div><h3 class="text-lg font-semibold text-gray-400">Bitcoin Model (Final Year)</h3><p>Starting Principal: <span class="font-mono float-right">${formatter.format(startOfYearBtc)}</span></p><p>Net Savings Added: <span class="font-mono float-right">+ ${formatter.format(savings)}</span></p><p>Capital Gain: <span class="font-mono float-right text-green-400">+ ${formatter.format(finalBtcGrowth)}</span></p><p class="font-semibold">Capital Gains Tax Paid: <span class="font-mono float-right text-red-400">- ${formatter.format(finalBtcTax)}</span></p><hr class="border-gray-500 my-2"><p>Final Net Worth: <span class="font-mono float-right font-bold text-orange-400">${formatter.format(btc.netWorth)}</span></p></div>`;
+                }
+            }
+
+            renderCumulativeSummary(cumulative, trad.netWorth, btc.netWorth);
+            el('finalYearBreakdown').innerHTML = finalBreakdownHTML;
+            renderChart(chartData);
+            generateShareableLink();
+            el('results').style.display = 'block';
+
+        } catch (e) {
+            console.error("Simulation Error:", e);
+            alert("An error occurred during calculation. Please check the console (Right-click -> Inspect -> Console) for more details.");
+        }
+    }
+
+    function renderCumulativeSummary(cumulative, tradWorth, btcWorth) {
+        const createRow = (metric, tradVal, btcVal, isNeg = false) => `<tr><td class="py-2 px-4 font-semibold">${metric}</td><td class="py-2 px-4 text-right font-mono">${formatter.format(isNeg ? -tradVal : tradVal)}</td><td class="py-2 px-4 text-right font-mono">${formatter.format(isNeg ? -btcVal : btcVal)}</td></tr>`;
+        el('cumulativeSummaryBody').innerHTML = createRow('Total Gross Income', cumulative.grossIncome, cumulative.grossIncome) + createRow('Total Income Tax Paid', cumulative.incomeTax, cumulative.incomeTax, true) + createRow('Total Expenses Paid', cumulative.expenses, cumulative.expenses, true) + `<tr class="bg-gray-600 font-bold"><td class="py-2 px-4">Total Invested Savings</td><td class="py-2 px-4 text-right font-mono">${formatter.format(cumulative.investedSavings)}</td><td class="py-2 px-4 text-right font-mono">${formatter.format(cumulative.investedSavings)}</td></tr>` + createRow('Total Growth Generated', cumulative.tradGrowth, cumulative.btcGrowth) + createRow('Total Capital Gains Tax', cumulative.tradTax, cumulative.btcTax, true) + `<tr class="bg-gray-600 font-bold"><td class="py-2 px-4">Final Net Worth</td><td class="py-2 px-4 text-right font-mono">${formatter.format(tradWorth)}</td><td class="py-2 px-4 text-right font-mono">${formatter.format(btcWorth)}</td></tr>`;
+    }
+    
+    function renderChart(chartData) {
+        if (projectionChart) projectionChart.destroy();
+        projectionChart = new Chart(el('projectionChart').getContext('2d'), { type: 'line', data: { labels: chartData.labels, datasets: [ { label: 'Traditional Net Worth', data: chartData.trad, borderColor: 'rgba(54, 162, 235, 1)', backgroundColor: 'rgba(54, 162, 235, 0.2)', fill: true, tension: 0.1 }, { label: 'Bitcoin Standard Net Worth', data: chartData.btc, borderColor: 'rgba(242, 169, 0, 1)', backgroundColor: 'rgba(242, 169, 0, 0.2)', fill: true, tension: 0.1 } ] }, options: { responsive: true, scales: { y: { beginAtZero: true, ticks: { color: '#fff' } }, x: { ticks: { color: '#fff' } } }, plugins: { legend: { labels: { color: '#fff' } } } } });
+    }
+
+    function generateShareableLink() {
+        const params = new URLSearchParams();
+        inputIds.forEach(id => params.append(id, el(id).value));
+        el('shareableLink').value = `${window.location.origin}${window.location.pathname}?${params.toString()}`;
+    }
+
+    function loadFromURL() {
+        const params = new URLSearchParams(window.location.search);
+        if (params.size > 0) {
+            params.forEach((value, key) => {
+                if (inputIds.includes(key) && el(key)) {
+                    el(key).value = value;
+                }
+            });
+            runSimulation();
+        }
+    }
+    
+    el('calculateBtn').addEventListener('click', runSimulation);
+    el('copyLinkBtn').addEventListener('click', () => {
+        el('shareableLink').select();
+        navigator.clipboard.writeText(el('shareableLink').value);
+    });
+
+    loadFromURL();
+});
+</script>
 </body>
 </html>
