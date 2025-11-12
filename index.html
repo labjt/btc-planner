@@ -3,39 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BTC Planner - Monte Carlo Edition</title>
+    <title>BTC Planner - v2.0 Development</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body class="bg-gray-900 text-white font-sans flex items-center justify-center min-h-screen py-12">
-    <div class="bg-gray-800 rounded-lg shadow-xl p-8 max-w-5xl w-full">
+    <div class="bg-gray-800 rounded-lg shadow-xl p-8 max-w-6xl w-full">
         <!-- Main HTML Structure -->
         <div class="text-center mb-8">
             <h1 class="text-4xl font-bold text-orange-500">BTC Planner</h1>
-            <p class="text-gray-400 mt-2">A probabilistic forecasting tool for the Bitcoin standard.</p>
+            <p class="text-gray-400 mt-2">A professional tool for long-term Bitcoin standard financial projection.</p>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <!-- Starting Capital Column -->
             <div class="bg-gray-700 p-4 rounded-lg space-y-4">
-                <h2 class="text-xl font-semibold text-gray-300">Your Finances</h2>
+                <h2 class="text-xl font-semibold text-gray-300">Starting Capital</h2>
+                <div data-input-id="existingCash"><label for="existingCash" class="block text-sm font-medium text-gray-400">Existing Cash ($)</label><input type="number" id="existingCash" value="50000" class="mt-1 block w-full bg-gray-600 rounded-md p-2"></div>
+                <div data-input-id="existingBtc"><label for="existingBtc" class="block text-sm font-medium text-gray-400">Existing Bitcoin (BTC)</label><input type="number" id="existingBtc" value="1" class="mt-1 block w-full bg-gray-600 rounded-md p-2"></div>
+                <div data-input-id="btcCostBasis"><label for="btcCostBasis" class="block text-sm font-medium text-gray-400">BTC Cost Basis ($)</label><input type="number" id="btcCostBasis" value="20000" class="mt-1 block w-full bg-gray-600 rounded-md p-2"></div>
+            </div>
+            <!-- Annual Flow Column -->
+            <div class="bg-gray-700 p-4 rounded-lg space-y-4">
+                <h2 class="text-xl font-semibold text-gray-300">Annual Flow</h2>
                 <div data-input-id="annualIncome"><label for="annualIncome" class="block text-sm font-medium text-gray-400">Annual Income ($)</label><input type="number" id="annualIncome" value="120000" class="mt-1 block w-full bg-gray-600 rounded-md p-2"></div>
                 <div data-input-id="monthlyExpenses"><label for="monthlyExpenses" class="block text-sm font-medium text-gray-400">Monthly Expenses ($)</label><input type="number" id="monthlyExpenses" value="5000" class="mt-1 block w-full bg-gray-600 rounded-md p-2"></div>
-                <div data-input-id="salaryGrowthRate"><label for="salaryGrowthRate" class="block text-sm font-medium text-gray-400">Annual Salary Growth (%)</label><input type="number" id="salaryGrowthRate" value="3" class="mt-1 block w-full bg-gray-600 rounded-md p-2"></div>
-                <div data-input-id="inflationRate"><label for="inflationRate" class="block text-sm font-medium text-gray-400">Annual Inflation (%)</label><input type="number" id="inflationRate" value="2" class="mt-1 block w-full bg-gray-600 rounded-md p-2"></div>
+                <div data-input-id="salaryGrowthRate"><label for="salaryGrowthRate" class="block text-sm font-medium text-gray-400">Salary Growth (%)</label><input type="number" id="salaryGrowthRate" value="3" class="mt-1 block w-full bg-gray-600 rounded-md p-2"></div>
+                <div data-input-id="inflationRate"><label for="inflationRate" class="block text-sm font-medium text-gray-400">Inflation (%)</label><input type="number" id="inflationRate" value="2" class="mt-1 block w-full bg-gray-600 rounded-md p-2"></div>
             </div>
+            <!-- Taxes & Growth Column -->
             <div class="bg-gray-700 p-4 rounded-lg space-y-4">
-                <h2 class="text-xl font-semibold text-gray-300">Taxes & Assumptions</h2>
-                <div data-input-id="incomeTaxRate"><label for="incomeTaxRate" class="block text-sm font-medium text-gray-400">Income / Short-Term Gains Rate (%)</label><input type="number" id="incomeTaxRate" value="30" class="mt-1 block w-full bg-gray-600 rounded-md p-2"></div>
-                <div data-input-id="longTermGainsRate"><label for="longTermGainsRate" class="block text-sm font-medium text-gray-400">Long-Term Gains Rate (%)</label><input type="number" id="longTermGainsRate" value="20" class="mt-1 block w-full bg-gray-600 rounded-md p-2"></div>
+                <h2 class="text-xl font-semibold text-gray-300">Taxes & Growth</h2>
+                <div data-input-id="incomeTaxRate"><label for="incomeTaxRate" class="block text-sm font-medium text-gray-400">Income / Short-Term Rate (%)</label><input type="number" id="incomeTaxRate" value="30" class="mt-1 block w-full bg-gray-600 rounded-md p-2"></div>
+                <div data-input-id="longTermGainsRate"><label for="longTermGainsRate" class="block text-sm font-medium text-gray-400">Long-Term Rate (%)</label><input type="number" id="longTermGainsRate" value="20" class="mt-1 block w-full bg-gray-600 rounded-md p-2"></div>
                 <div data-input-id="traditionalGrowthRate"><label for="traditionalGrowthRate" class="block text-sm font-medium text-gray-400">Traditional Growth (%)</label><input type="number" id="traditionalGrowthRate" value="5" class="mt-1 block w-full bg-gray-600 rounded-md p-2"></div>
-                 <div data-input-id="btcAvgReturn"><label for="btcAvgReturn" class="block text-sm font-medium text-gray-400">BTC Avg. Annual Return (%)</label><input type="number" id="btcAvgReturn" value="60" class="mt-1 block w-full bg-gray-600 rounded-md p-2"></div>
-                <div data-input-id="btcVolatility"><label for="btcVolatility" class="block text-sm font-medium text-gray-400">BTC Annual Volatility (%)</label><input type="number" id="btcVolatility" value="80" class="mt-1 block w-full bg-gray-600 rounded-md p-2"></div>
+                 <div data-input-id="btcAvgReturn"><label for="btcAvgReturn" class="block text-sm font-medium text-gray-400">BTC Avg. Return (%)</label><input type="number" id="btcAvgReturn" value="60" class="mt-1 block w-full bg-gray-600 rounded-md p-2"></div>
+                <div data-input-id="btcVolatility"><label for="btcVolatility" class="block text-sm font-medium text-gray-400">BTC Volatility (%)</label><input type="number" id="btcVolatility" value="80" class="mt-1 block w-full bg-gray-600 rounded-md p-2"></div>
             </div>
+            <!-- Simulation Control Column -->
             <div class="bg-gray-700 p-4 rounded-lg flex flex-col justify-between">
-                <div><h2 class="text-xl font-semibold mb-4">Simulation Control</h2><div data-input-id="simulationYears"><label for="simulationYears" class="block text-sm font-medium text-gray-400">Number of Years</label><input type="number" id="simulationYears" value="10" class="mt-1 block w-full bg-gray-600 rounded-md p-2"></div>
-                <div data-input-id="numSimulations" class="mt-4"><label for="numSimulations" class="block text-sm font-medium text-gray-400">Number of Simulations</label><input type="number" id="numSimulations" value="1000" class="mt-1 block w-full bg-gray-600 rounded-md p-2"></div></div>
+                <div><h2 class="text-xl font-semibold mb-4">Simulation</h2><div data-input-id="simulationYears"><label for="simulationYears" class="block text-sm font-medium text-gray-400">Number of Years</label><input type="number" id="simulationYears" value="10" class="mt-1 block w-full bg-gray-600 rounded-md p-2"></div>
+                <div data-input-id="numSimulations" class="mt-4"><label for="numSimulations" class="block text-sm font-medium text-gray-400">Simulations</label><input type="number" id="numSimulations" value="1000" class="mt-1 block w-full bg-gray-600 rounded-md p-2"></div></div>
                 <button id="calculateBtn" class="w-full mt-4 bg-orange-600 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-lg">Run Projection</button>
             </div>
         </div>
+        <!-- Results Sections -->
         <div id="results" class="mt-10 space-y-10" style="display: none;">
             <div><h2 class="text-2xl font-semibold mb-4 text-center">Probabilistic Net Worth Projection</h2><div class="bg-gray-700 p-4 rounded-lg"><canvas id="projectionChart"></canvas></div></div>
             <div><h2 class="text-2xl font-semibold mb-4 text-center">Range of Final Net Worth Outcomes</h2><div id="outcomeSummary" class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center"></div></div>
@@ -51,7 +62,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const formatter = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0, maximumFractionDigits: 0 });
     let projectionChart = null;
 
-    const inputIds = [ 'annualIncome', 'monthlyExpenses', 'salaryGrowthRate', 'inflationRate', 'incomeTaxRate', 'longTermGainsRate', 'traditionalGrowthRate', 'btcAvgReturn', 'btcVolatility', 'simulationYears', 'numSimulations' ];
+    const inputIds = [
+        'existingCash', 'existingBtc', 'btcCostBasis',
+        'annualIncome', 'monthlyExpenses', 'salaryGrowthRate', 'inflationRate', 
+        'incomeTaxRate', 'longTermGainsRate', 'traditionalGrowthRate', 
+        'btcAvgReturn', 'btcVolatility', 'simulationYears', 'numSimulations'
+    ];
 
     function generateNormalRandom(mean, stdDev) {
         let u1 = 0, u2 = 0;
@@ -68,7 +84,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const allBtcTrajectories = [];
             for (let i = 0; i < inputs.numSimulations; i++) {
-                let btcNetWorth = 0, longTermCapital = 0;
+                // Initialize with starting capital
+                let btcNetWorth = inputs.btcCostBasis;
+                let longTermCapital = inputs.btcCostBasis;
                 const trajectory = [];
                 for (let year = 1; year <= inputs.simulationYears; year++) {
                     const currentIncome = inputs.annualIncome * Math.pow(1 + inputs.salaryGrowthRate / 100, year - 1);
@@ -96,7 +114,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             const tradTrajectory = [];
-            let tradNetWorth = 0, tradLongTermCapital = 0;
+            // Initialize with starting capital
+            let tradNetWorth = inputs.existingCash;
+            let tradLongTermCapital = inputs.existingCash;
             for (let year = 1; year <= inputs.simulationYears; year++) {
                 const currentIncome = inputs.annualIncome * Math.pow(1 + inputs.salaryGrowthRate / 100, year - 1);
                 const currentExpenses = (inputs.monthlyExpenses * 12) * Math.pow(1 + inputs.inflationRate / 100, year - 1);
@@ -117,6 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch (e) { console.error("Simulation Error:", e); alert("An error occurred during calculation."); }
     }
     
+    // ... All render functions remain the same as the previous fully working version ...
     function renderAllResults(btcPercentiles, traditional, inputs) {
         renderOutcomes(btcPercentiles);
         renderYearByYearTable(btcPercentiles.p50, traditional);
@@ -141,13 +162,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function renderFinalYearBreakdown(medianBtc, traditional, inputs) {
         const N = inputs.simulationYears;
-        // Re-calculate final year's income and savings
         const finalYearIncome = inputs.annualIncome * Math.pow(1 + inputs.salaryGrowthRate / 100, N - 1);
         const finalYearExpenses = (inputs.monthlyExpenses * 12) * Math.pow(1 + inputs.inflationRate / 100, N - 1);
         const finalYearSavings = (finalYearIncome * (1 - inputs.incomeTaxRate / 100)) - finalYearExpenses;
 
-        // Re-calculate final year for Traditional model to get accurate components
-        const startTrad = traditional[N - 2] || 0;
+        const startTrad = traditional[N - 2] || inputs.existingCash;
         const tradLongTermGrowth = startTrad * (inputs.traditionalGrowthRate / 100);
         const tradShortTermGrowth = finalYearSavings * (inputs.traditionalGrowthRate / 100);
         const tradTotalGrowth = tradLongTermGrowth + tradShortTermGrowth;
@@ -155,52 +174,20 @@ document.addEventListener('DOMContentLoaded', () => {
         const tradShortTermTax = tradShortTermGrowth * (inputs.incomeTaxRate / 100);
         const tradTotalTax = tradLongTermTax + tradShortTermTax;
 
-        // For BTC, we approximate the median run's final year components by working backwards
-        const startBtc = medianBtc[N - 2] || 0;
+        const startBtc = medianBtc[N - 2] || inputs.btcCostBasis;
         const endBtc = medianBtc[N - 1];
         const btcTotalNetGain = endBtc - startBtc - finalYearSavings;
         const avgBtcTaxRate = (inputs.incomeTaxRate / 100 + inputs.longTermGainsRate / 100) / 2;
-        const btcTotalGrowth = btcTotalNetGain / (1 - avgBtcTaxRate);
+        const btcTotalGrowth = btcTotalNetGain > 0 ? btcTotalNetGain / (1 - avgBtcTaxRate) : btcTotalNetGain;
         const btcTotalTax = btcTotalGrowth * avgBtcTaxRate;
         
-        el('finalYearBreakdown').innerHTML = `
-            <div>
-                <h3 class="text-lg font-semibold text-gray-400">Traditional Model (Final Year)</h3>
-                <p>Starting Principal: <span class="font-mono float-right">${formatter.format(startTrad)}</span></p>
-                <p>Annual Savings Added: <span class="font-mono float-right text-green-400">${formatter.format(finalYearSavings)}</span></p>
-                <p>Investment Growth: <span class="font-mono float-right text-green-400">${formatter.format(tradTotalGrowth)}</span></p>
-                <p class="font-semibold">Capital Gains Tax Paid: <span class="font-mono float-right text-red-400">${formatter.format(-tradTotalTax)}</span></p>
-                <hr class="border-gray-500 my-2">
-                <p>Final Net Worth: <span class="font-mono float-right font-bold">${formatter.format(traditional[N - 1])}</span></p>
-            </div>
-            <div>
-                <h3 class="text-lg font-semibold text-gray-400">Bitcoin Model (Median Final Year)</h3>
-                <p>Starting Principal: <span class="font-mono float-right">${formatter.format(startBtc)}</span></p>
-                <p>Net Savings Added: <span class="font-mono float-right text-green-400">${formatter.format(finalYearSavings)}</span></p>
-                <p>Capital Gain (Approx.): <span class="font-mono float-right text-green-400">${formatter.format(btcTotalGrowth)}</span></p>
-                <p class="font-semibold">Capital Gains Tax Paid (Approx.): <span class="font-mono float-right text-red-400">${formatter.format(-btcTotalTax)}</span></p>
-                <hr class="border-gray-500 my-2">
-                <p>Final Net Worth: <span class="font-mono float-right font-bold text-orange-400">${formatter.format(endBtc)}</span></p>
-            </div>
-        `;
+        el('finalYearBreakdown').innerHTML = `<div><h3 class="text-lg font-semibold text-gray-400">Traditional Model (Final Year)</h3><p>Starting Principal: <span class="font-mono float-right">${formatter.format(startTrad)}</span></p><p>Annual Savings Added: <span class="font-mono float-right text-green-400">${formatter.format(finalYearSavings)}</span></p><p>Investment Growth: <span class="font-mono float-right text-green-400">${formatter.format(tradTotalGrowth)}</span></p><p class="font-semibold">Capital Gains Tax Paid: <span class="font-mono float-right text-red-400">${formatter.format(-tradTotalTax)}</span></p><hr class="border-gray-500 my-2"><p>Final Net Worth: <span class="font-mono float-right font-bold">${formatter.format(traditional[N - 1])}</span></p></div><div><h3 class="text-lg font-semibold text-gray-400">Bitcoin Model (Median Final Year)</h3><p>Starting Principal: <span class="font-mono float-right">${formatter.format(startBtc)}</span></p><p>Net Savings Added: <span class="font-mono float-right text-green-400">${formatter.format(finalYearSavings)}</span></p><p>Capital Gain (Approx.): <span class="font-mono float-right text-green-400">${formatter.format(btcTotalGrowth)}</span></p><p class="font-semibold">Capital Gains Tax Paid (Approx.): <span class="font-mono float-right text-red-400">${formatter.format(-btcTotalTax)}</span></p><hr class="border-gray-500 my-2"><p>Final Net Worth: <span class="font-mono float-right font-bold text-orange-400">${formatter.format(endBtc)}</span></p></div>`;
     }
 
     function renderChart(btcPercentiles, traditional) {
         if (projectionChart) projectionChart.destroy();
         const labels = Array.from({ length: traditional.length }, (_, i) => `Year ${i + 1}`);
-        projectionChart = new Chart(el('projectionChart').getContext('2d'), {
-            type: 'line',
-            data: {
-                labels: labels,
-                datasets: [
-                    { label: 'Traditional Net Worth', data: traditional, borderColor: 'rgba(54, 162, 235, 1)', borderWidth: 2, fill: false },
-                    { label: 'BTC Median Outcome', data: btcPercentiles.p50, borderColor: 'rgba(242, 169, 0, 1)', borderWidth: 3, fill: false },
-                    { label: 'BTC 25th-75th Percentile', data: btcPercentiles.p25, borderColor: 'transparent', backgroundColor: 'rgba(242, 169, 0, 0.2)', pointRadius: 0, fill: '+1' },
-                    { data: btcPercentiles.p75, borderColor: 'transparent', backgroundColor: 'rgba(242, 169, 0, 0.2)', pointRadius: 0, fill: '-1' }
-                ]
-            },
-            options: { responsive: true, scales: { y: { beginAtZero: true, ticks: { color: '#fff' } }, x: { ticks: { color: '#fff' } } }, plugins: { legend: { labels: { color: '#fff' } } } }
-        });
+        projectionChart = new Chart(el('projectionChart').getContext('2d'), { type: 'line', data: { labels: labels, datasets: [ { label: 'Traditional Net Worth', data: traditional, borderColor: 'rgba(54, 162, 235, 1)', borderWidth: 2, fill: false }, { label: 'BTC Median Outcome', data: btcPercentiles.p50, borderColor: 'rgba(242, 169, 0, 1)', borderWidth: 3, fill: false }, { label: 'BTC 25th-75th Percentile', data: btcPercentiles.p25, borderColor: 'transparent', backgroundColor: 'rgba(242, 169, 0, 0.2)', pointRadius: 0, fill: '+1' }, { data: btcPercentiles.p75, borderColor: 'transparent', backgroundColor: 'rgba(242, 169, 0, 0.2)', pointRadius: 0, fill: '-1' } ] }, options: { responsive: true, scales: { y: { beginAtZero: true, ticks: { color: '#fff' } }, x: { ticks: { color: '#fff' } } }, plugins: { legend: { labels: { color: '#fff' } } } } });
     }
 
     function generateShareableLink() {
