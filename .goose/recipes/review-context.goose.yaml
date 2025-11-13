@@ -1,0 +1,19 @@
+# .goose/recipes/review-context.goose.yaml
+description: Reviews the current state of the project to bootstrap a new session.
+
+steps:
+  - name: Check Current Directory
+    tool: developer
+    command: pwd && ls -F
+
+  - name: Check Git Status
+    tool: developer
+    command: git status
+
+  - name: Review Recent Commits
+    tool: developer
+    command: git log --oneline -n 5
+
+  - name: List Version Tags
+    tool: developer
+    command: git tag --sort=-v:refname | head -n 5
