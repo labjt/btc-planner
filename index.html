@@ -3,97 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BTC Planner - v2.0</title>
+    <title>BTC Planner - v2.1 Final</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body class="bg-gray-900 text-white font-sans flex items-center justify-center min-h-screen py-12">
     <div class="bg-gray-800 rounded-lg shadow-xl p-8 max-w-4xl w-full">
-        <!-- Main HTML Structure -->
+        <!-- UI Structure -->
         <div class="text-center mb-8">
             <h1 class="text-4xl font-bold text-orange-500">BTC Planner</h1>
             <p class="text-gray-400 mt-2">A professional tool for modeling a gradual transition to a Bitcoin standard.</p>
         </div>
-
-        <!-- Tabbed Input Section -->
         <div>
-            <!-- Tab Buttons -->
             <div class="border-b border-gray-700">
-                <nav class="-mb-px flex space-x-8" aria-label="Tabs">
-                    <button class="tab-button whitespace-nowrap py-4 px-1 border-b-2 font-medium text-lg text-orange-500 border-orange-500" data-tab="startingCapital">Starting Capital</button>
-                    <button class="tab-button whitespace-nowrap py-4 px-1 border-b-2 font-medium text-lg text-gray-400 border-transparent hover:text-gray-300 hover:border-gray-300" data-tab="annualFlow">Annual Flow</button>
-                    <button class="tab-button whitespace-nowrap py-4 px-1 border-b-2 font-medium text-lg text-gray-400 border-transparent hover:text-gray-300 hover:border-gray-300" data-tab="taxesGrowth">Taxes & Growth</button>
-                    <button class="tab-button whitespace-nowrap py-4 px-1 border-b-2 font-medium text-lg text-gray-400 border-transparent hover:text-gray-300 hover:border-gray-300" data-tab="simulation">Simulation</button>
-                </nav>
+                <nav class="-mb-px flex space-x-8" aria-label="Tabs"><button class="tab-button whitespace-nowrap py-4 px-1 border-b-2 font-medium text-lg text-orange-500 border-orange-500" data-tab="startingCapital">Starting Capital</button><button class="tab-button whitespace-nowrap py-4 px-1 border-b-2 font-medium text-lg text-gray-400 border-transparent hover:text-gray-300 hover:border-gray-300" data-tab="annualFlow">Annual Flow</button><button class="tab-button whitespace-nowrap py-4 px-1 border-b-2 font-medium text-lg text-gray-400 border-transparent hover:text-gray-300 hover:border-gray-300" data-tab="taxesGrowth">Taxes & Growth</button><button class="tab-button whitespace-nowrap py-4 px-1 border-b-2 font-medium text-lg text-gray-400 border-transparent hover:text-gray-300 hover:border-gray-300" data-tab="simulation">Simulation</button></nav>
             </div>
-            <!-- Tab Content Panels -->
             <div class="mt-8">
-                <div class="tab-panel" id="startingCapital">
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div data-input-id="existingCash"><label for="existingCash" class="block text-sm font-medium text-gray-400">Existing Cash ($)</label><input type="number" id="existingCash" value="50000" class="mt-1 block w-full bg-gray-700 rounded-md p-2"></div>
-                        <div data-input-id="existingBtc"><label for="existingBtc" class="block text-sm font-medium text-gray-400">Existing Bitcoin (BTC)</label><input type="number" id="existingBtc" value="1" class="mt-1 block w-full bg-gray-700 rounded-md p-2"></div>
-                        <div data-input-id="btcCostBasis"><label for="btcCostBasis" class="block text-sm font-medium text-gray-400">BTC Cost Basis ($)</label><input type="number" id="btcCostBasis" value="20000" class="mt-1 block w-full bg-gray-700 rounded-md p-2"></div>
-                    </div>
-                </div>
-                <div class="tab-panel hidden" id="annualFlow">
-                    <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-                        <div data-input-id="annualIncome"><label for="annualIncome" class="block text-sm font-medium text-gray-400">Annual Income ($)</label><input type="number" id="annualIncome" value="120000" class="mt-1 block w-full bg-gray-700 rounded-md p-2"></div>
-                        <div data-input-id="monthlyExpenses"><label for="monthlyExpenses" class="block text-sm font-medium text-gray-400">Monthly Expenses ($)</label><input type="number" id="monthlyExpenses" value="5000" class="mt-1 block w-full bg-gray-700 rounded-md p-2"></div>
-                        <div data-input-id="salaryGrowthRate"><label for="salaryGrowthRate" class="block text-sm font-medium text-gray-400">Salary Growth (%)</label><input type="number" id="salaryGrowthRate" value="3" class="mt-1 block w-full bg-gray-700 rounded-md p-2"></div>
-                        <div data-input-id="inflationRate"><label for="inflationRate" class="block text-sm font-medium text-gray-400">Inflation (%)</label><input type="number" id="inflationRate" value="2" class="mt-1 block w-full bg-gray-700 rounded-md p-2"></div>
-                    </div>
-                </div>
-                <div class="tab-panel hidden" id="taxesGrowth">
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div data-input-id="incomeTaxRate"><label for="incomeTaxRate" class="block text-sm font-medium text-gray-400">Income / ST Gains Rate (%)</label><input type="number" id="incomeTaxRate" value="30" class="mt-1 block w-full bg-gray-700 rounded-md p-2"></div>
-                        <div data-input-id="longTermGainsRate"><label for="longTermGainsRate" class="block text-sm font-medium text-gray-400">Long-Term Rate (%)</label><input type="number" id="longTermGainsRate" value="20" class="mt-1 block w-full bg-gray-700 rounded-md p-2"></div>
-                        <div data-input-id="traditionalGrowthRate"><label for="traditionalGrowthRate" class="block text-sm font-medium text-gray-400">Traditional Growth (%)</label><input type="number" id="traditionalGrowthRate" value="5" class="mt-1 block w-full bg-gray-700 rounded-md p-2"></div>
-                        <div data-input-id="btcAvgReturn"><label for="btcAvgReturn" class="block text-sm font-medium text-gray-400">BTC Avg. Return (%)</label><input type="number" id="btcAvgReturn" value="60" class="mt-1 block w-full bg-gray-700 rounded-md p-2"></div>
-                        <div data-input-id="btcVolatility"><label for="btcVolatility" class="block text-sm font-medium text-gray-400">BTC Volatility (%)</label><input type="number" id="btcVolatility" value="80" class="mt-1 block w-full bg-gray-700 rounded-md p-2"></div>
-                    </div>
-                </div>
-                <div class="tab-panel hidden" id="simulation">
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div data-input-id="simulationYears"><label for="simulationYears" class="block text-sm font-medium text-gray-400">Number of Years</label><input type="number" id="simulationYears" value="10" class="mt-1 block w-full bg-gray-700 rounded-md p-2"></div>
-                        <div data-input-id="numSimulations"><label for="numSimulations" class="block text-sm font-medium text-gray-400">Simulations</label><input type="number" id="numSimulations" value="1000" class="mt-1 block w-full bg-gray-700 rounded-md p-2"></div>
-                        <div data-input-id="allocationBtc"><label for="allocationBtc" class="block text-sm font-medium text-gray-400">Allocation to BTC (%)</label><input type="number" id="allocationBtc" value="100" min="0" max="100" class="mt-1 block w-full bg-gray-700 rounded-md p-2"></div>
-                    </div>
-                </div>
+                <div class="tab-panel" id="startingCapital"><div class="grid grid-cols-1 md:grid-cols-3 gap-6"><div data-input-id="existingCash"><label for="existingCash" class="block text-sm font-medium text-gray-400">Existing Cash ($)</label><input type="number" id="existingCash" value="50000" class="mt-1 block w-full bg-gray-700 rounded-md p-2"></div><div data-input-id="existingBtc"><label for="existingBtc" class="block text-sm font-medium text-gray-400">Existing Bitcoin (BTC)</label><input type="number" id="existingBtc" value="1" class="mt-1 block w-full bg-gray-700 rounded-md p-2"></div><div data-input-id="btcCostBasis"><label for="btcCostBasis" class="block text-sm font-medium text-gray-400">BTC Cost Basis ($)</label><input type="number" id="btcCostBasis" value="20000" class="mt-1 block w-full bg-gray-700 rounded-md p-2"></div></div></div>
+                <div class="tab-panel hidden" id="annualFlow"><div class="grid grid-cols-1 md:grid-cols-4 gap-6"><div data-input-id="annualIncome"><label for="annualIncome" class="block text-sm font-medium text-gray-400">Annual Income ($)</label><input type="number" id="annualIncome" value="120000" class="mt-1 block w-full bg-gray-700 rounded-md p-2"></div><div data-input-id="monthlyExpenses"><label for="monthlyExpenses" class="block text-sm font-medium text-gray-400">Monthly Expenses ($)</label><input type="number" id="monthlyExpenses" value="5000" class="mt-1 block w-full bg-gray-700 rounded-md p-2"></div><div data-input-id="salaryGrowthRate"><label for="salaryGrowthRate" class="block text-sm font-medium text-gray-400">Salary Growth (%)</label><input type="number" id="salaryGrowthRate" value="3" class="mt-1 block w-full bg-gray-700 rounded-md p-2"></div><div data-input-id="inflationRate"><label for="inflationRate" class="block text-sm font-medium text-gray-400">Inflation (%)</label><input type="number" id="inflationRate" value="2" class="mt-1 block w-full bg-gray-700 rounded-md p-2"></div></div></div>
+                <div class="tab-panel hidden" id="taxesGrowth"><div class="grid grid-cols-1 md:grid-cols-3 gap-6"><div data-input-id="incomeTaxRate"><label for="incomeTaxRate" class="block text-sm font-medium text-gray-400">Income / ST Gains Rate (%)</label><input type="number" id="incomeTaxRate" value="30" class="mt-1 block w-full bg-gray-700 rounded-md p-2"></div><div data-input-id="longTermGainsRate"><label for="longTermGainsRate" class="block text-sm font-medium text-gray-400">Long-Term Rate (%)</label><input type="number" id="longTermGainsRate" value="20" class="mt-1 block w-full bg-gray-700 rounded-md p-2"></div><div data-input-id="traditionalGrowthRate"><label for="traditionalGrowthRate" class="block text-sm font-medium text-gray-400">Traditional Growth (%)</label><input type="number" id="traditionalGrowthRate" value="5" class="mt-1 block w-full bg-gray-700 rounded-md p-2"></div><div data-input-id="btcAvgReturn"><label for="btcAvgReturn" class="block text-sm font-medium text-gray-400">BTC Avg. Return (%)</label><input type="number" id="btcAvgReturn" value="60" class="mt-1 block w-full bg-gray-700 rounded-md p-2"></div><div data-input-id="btcVolatility"><label for="btcVolatility" class="block text-sm font-medium text-gray-400">BTC Volatility (%)</label><input type="number" id="btcVolatility" value="80" class="mt-1 block w-full bg-gray-700 rounded-md p-2"></div></div></div>
+                <div class="tab-panel hidden" id="simulation"><div class="grid grid-cols-1 md:grid-cols-3 gap-6"><div data-input-id="simulationYears"><label for="simulationYears" class="block text-sm font-medium text-gray-400">Number of Years</label><input type="number" id="simulationYears" value="10" class="mt-1 block w-full bg-gray-700 rounded-md p-2"></div><div data-input-id="numSimulations"><label for="numSimulations" class="block text-sm font-medium text-gray-400">Simulations</label><input type="number" id="numSimulations" value="1000" class="mt-1 block w-full bg-gray-700 rounded-md p-2"></div><div data-input-id="allocationBtc"><label for="allocationBtc" class="block text-sm font-medium text-gray-400">Allocation to BTC (%)</label><input type="number" id="allocationBtc" value="100" min="0" max="100" class="mt-1 block w-full bg-gray-700 rounded-md p-2"></div><div data-input-id="cashBuffer"><label for="cashBuffer" class="block text-sm font-medium text-gray-400">Cash Buffer (Months)</label><input type="number" id="cashBuffer" value="3" class="mt-1 block w-full bg-gray-700 rounded-md p-2"></div><div data-input-id="taxStrategy"><label for="taxStrategy" class="block text-sm font-medium text-gray-400">Tax Strategy</label><select id="taxStrategy" class="mt-1 block w-full bg-gray-700 rounded-md p-2"><option value="hifo">HIFO (Highest-In, First-Out)</option><option value="fifo">FIFO (First-In, First-Out)</option></select></div></div></div>
             </div>
         </div>
-        <div class="text-center mt-8">
-            <button id="calculateBtn" class="bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-12 rounded-lg text-xl">Run Projection</button>
-        </div>
-        <div id="results" class="mt-10 space-y-10" style="display: none;">
-            <!-- Results will be injected here by JS -->
-        </div>
+        <div class="text-center mt-8"><button id="calculateBtn" class="bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-12 rounded-lg text-xl">Run Projection</button></div>
+        <div id="results" class="mt-10 space-y-10" style="display: none;"></div>
     </div>
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-    // --- TAB HANDLING LOGIC ---
-    const tabButtons = document.querySelectorAll('.tab-button');
-    const tabPanels = document.querySelectorAll('.tab-panel');
-    tabButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            tabButtons.forEach(btn => {
-                btn.classList.remove('text-orange-500', 'border-orange-500');
-                btn.classList.add('text-gray-400', 'border-transparent');
-            });
-            tabPanels.forEach(panel => panel.classList.add('hidden'));
-            button.classList.add('text-orange-500', 'border-orange-500');
-            button.classList.remove('text-gray-400', 'border-transparent');
-            document.getElementById(button.dataset.tab).classList.remove('hidden');
-        });
-    });
-
-    // --- MAIN SIMULATION SCRIPT ---
+    // --- UI & UTILS ---
     const el = id => document.getElementById(id);
     const val = id => parseFloat(el(id).value);
+    const str = id => el(id).value;
     const formatter = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0, maximumFractionDigits: 0 });
     let projectionChart = null;
+    const inputIds = [ 'existingCash', 'existingBtc', 'btcCostBasis', 'annualIncome', 'monthlyExpenses', 'salaryGrowthRate', 'inflationRate', 'incomeTaxRate', 'longTermGainsRate', 'traditionalGrowthRate', 'btcAvgReturn', 'btcVolatility', 'simulationYears', 'numSimulations', 'allocationBtc', 'cashBuffer', 'taxStrategy' ];
 
-    const inputIds = [ 'existingCash', 'existingBtc', 'btcCostBasis', 'annualIncome', 'monthlyExpenses', 'salaryGrowthRate', 'inflationRate', 'incomeTaxRate', 'longTermGainsRate', 'traditionalGrowthRate', 'btcAvgReturn', 'btcVolatility', 'simulationYears', 'numSimulations', 'allocationBtc' ];
+    // --- TAB HANDLING ---
+    const tabButtons = document.querySelectorAll('.tab-button');
+    tabButtons.forEach(button => button.addEventListener('click', () => {
+        document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('text-orange-500', 'border-orange-500'));
+        document.querySelectorAll('.tab-panel').forEach(panel => panel.classList.add('hidden'));
+        button.classList.add('text-orange-500', 'border-orange-500');
+        el(button.dataset.tab).classList.remove('hidden');
+    }));
 
+    // --- SIMULATION ENGINE ---
     function generateNormalRandom(mean, stdDev) {
         let u1 = 0, u2 = 0;
         while (u1 === 0) u1 = Math.random();
@@ -101,78 +55,81 @@ document.addEventListener('DOMContentLoaded', () => {
         return Math.sqrt(-2.0 * Math.log(u1)) * Math.cos(2.0 * Math.PI * u2) * stdDev + mean;
     }
 
-    function runSingleYear(portfolio, savings, growthRate, taxRates, isBtc = false) {
-        const randomGrowth = isBtc ? generateNormalRandom(growthRate.avg, growthRate.vol) : growthRate.avg;
-        const longTermGrowth = portfolio.longTermCapital * randomGrowth;
-        const shortTermGrowth = savings * randomGrowth;
-        const longTermTax = longTermGrowth * taxRates.lt;
-        const shortTermTax = shortTermGrowth * taxRates.st;
-        portfolio.netWorth += savings + longTermGrowth + shortTermGrowth - longTermTax - shortTermTax;
-        portfolio.longTermCapital = portfolio.netWorth > 0 ? portfolio.netWorth : 0;
-        return { totalGrowth: longTermGrowth + shortTermGrowth, totalTax: longTermTax + shortTermTax };
-    }
-
     function runSimulation() {
         try {
             const inputs = {};
-            inputIds.forEach(id => inputs[id] = val(id));
+            inputIds.forEach(id => inputs[id] = (id === 'taxStrategy' ? str(id) : val(id)));
             const taxRates = { st: inputs.incomeTaxRate / 100, lt: inputs.longTermGainsRate / 100 };
-            const btcGrowth = { avg: inputs.btcAvgReturn / 100, vol: inputs.btcVolatility / 100 };
-            const tradGrowth = { avg: inputs.traditionalGrowthRate / 100, vol: 0 };
+            const monthlyBtcGrowth = { avg: Math.pow(1 + inputs.btcAvgReturn / 100, 1 / 12) - 1, vol: (inputs.btcVolatility / 100) / Math.sqrt(12) };
+            const monthlyTradGrowth = { avg: Math.pow(1 + inputs.traditionalGrowthRate / 100, 1 / 12) - 1, vol: 0 };
             const allocationToBtc = inputs.allocationBtc / 100;
+            const totalMonths = inputs.simulationYears * 12;
 
-            let finalYearBreakdownData = {};
-
-            const baselineTrajectory = [];
-            let baselinePortfolio = { netWorth: inputs.existingCash + inputs.btcCostBasis, longTermCapital: inputs.existingCash + inputs.btcCostBasis };
-            for (let year = 1; year <= inputs.simulationYears; year++) {
-                const { savings } = calculateAnnualFlow(year, inputs);
-                const { totalGrowth, totalTax } = runSingleYear(baselinePortfolio, savings, tradGrowth, taxRates);
-                baselineTrajectory.push(baselinePortfolio.netWorth);
-                if (year === inputs.simulationYears) {
-                    finalYearBreakdownData.baseline = { start: baselinePortfolio.netWorth - savings - totalGrowth + totalTax, savings, growth: totalGrowth, tax: totalTax, end: baselinePortfolio.netWorth };
-                }
-            }
-
-            const allMixedTrajectories = [];
+            const allTrajectories = [];
             for (let i = 0; i < inputs.numSimulations; i++) {
-                let tradPort = { netWorth: inputs.existingCash, longTermCapital: inputs.existingCash };
-                let btcPort = { netWorth: inputs.btcCostBasis, longTermCapital: inputs.btcCostBasis };
+                let cash = inputs.existingCash;
+                let tradLots = [{ amount: inputs.existingCash, basis: inputs.existingCash, month: 0 }];
+                let btcLots = [{ amount: inputs.btcCostBasis, basis: inputs.btcCostBasis, month: 0 }];
                 const trajectory = [];
-                for (let year = 1; year <= inputs.simulationYears; year++) {
-                    const { savings } = calculateAnnualFlow(year, inputs);
-                    const savingsToTrad = savings * (1 - allocationToBtc);
-                    const savingsToBtc = savings * allocationToBtc;
-                    runSingleYear(tradPort, savingsToTrad, tradGrowth, taxRates);
-                    runSingleYear(btcPort, savingsToBtc, btcGrowth, taxRates, true);
-                    trajectory.push(tradPort.netWorth + btcPort.netWorth);
-                }
-                allMixedTrajectories.push(trajectory);
-            }
-            
-            const percentileTrajectories = analyzeTrajectories(allMixedTrajectories, inputs.numSimulations, inputs.simulationYears);
-            
-            const medianRunFinalYear = percentileTrajectories.p50.slice(-1)[0];
-            const medianRunStartOfYear = percentileTrajectories.p50[percentileTrajectories.p50.length - 2] || (inputs.existingCash + inputs.btcCostBasis);
-            const { savings: finalYearSavings } = calculateAnnualFlow(inputs.simulationYears, inputs);
-            const medianNetGain = medianRunFinalYear - medianRunStartOfYear - finalYearSavings;
-            const avgTaxRate = (taxRates.st + taxRates.lt) / 2;
-            const medianGrowth = medianNetGain > 0 ? medianNetGain / (1 - avgTaxRate) : medianNetGain;
-            const medianTax = medianGrowth * avgTaxRate;
-            finalYearBreakdownData.mixed = { start: medianRunStartOfYear, savings: finalYearSavings, growth: medianGrowth, tax: medianTax, end: medianRunFinalYear };
 
-            renderAllResults(percentileTrajectories, baselineTrajectory, finalYearBreakdownData);
+                for (let month = 1; month <= totalMonths; month++) {
+                    const year = Math.ceil(month / 12);
+                    const monthlyIncome = (inputs.annualIncome * Math.pow(1 + inputs.salaryGrowthRate / 100, year - 1)) / 12;
+                    const monthlyExpenses = inputs.monthlyExpenses * Math.pow(1 + inputs.inflationRate / 100, year - 1);
+                    
+                    cash += monthlyIncome * (1 - taxRates.st) - monthlyExpenses;
+                    
+                    tradLots.forEach(lot => lot.amount *= (1 + monthlyTradGrowth.avg));
+                    btcLots.forEach(lot => lot.amount *= (1 + generateNormalRandom(monthlyBtcGrowth.avg, monthlyBtcGrowth.vol)));
+                    
+                    if (month % 12 === 0) { // End of year rebalancing
+                        const cashBufferTarget = monthlyExpenses * inputs.cashBuffer;
+                        const cashDelta = cashBufferTarget - cash;
+
+                        if (cashDelta > 0) {
+                            const { cashRaised, taxPaid } = sellAssets(cashDelta, btcLots, tradLots, inputs.taxStrategy, taxRates, month);
+                            cash += cashRaised - taxPaid;
+                        } else {
+                            const surplusToInvest = -cashDelta;
+                            const tradInvestment = surplusToInvest * (1 - allocationToBtc);
+                            const btcInvestment = surplusToInvest * allocationToBtc;
+                            if (tradInvestment > 0) tradLots.push({ amount: tradInvestment, basis: tradInvestment, month });
+                            if (btcInvestment > 0) btcLots.push({ amount: btcInvestment, basis: btcInvestment, month });
+                            cash -= surplusToInvest;
+                        }
+                    }
+                    if (month % 12 === 0 || month === totalMonths) {
+                        const totalValue = cash + tradLots.reduce((sum, lot) => sum + lot.amount, 0) + btcLots.reduce((sum, lot) => sum + lot.amount, 0);
+                        trajectory.push(totalValue);
+                    }
+                }
+                allTrajectories.push(trajectory);
+            }
+
+            const percentiles = analyzeTrajectories(allTrajectories, inputs.numSimulations, inputs.simulationYears);
+            renderResults(percentiles, inputs);
             generateShareableLink();
             el('results').style.display = 'block';
 
         } catch (e) { console.error("Simulation Error:", e); alert("An error occurred."); }
     }
 
-    function calculateAnnualFlow(year, inputs) {
-        const income = inputs.annualIncome * Math.pow(1 + inputs.salaryGrowthRate / 100, year - 1);
-        const expenses = (inputs.monthlyExpenses * 12) * Math.pow(1 + inputs.inflationRate / 100, year - 1);
-        const netIncome = income * (1 - inputs.incomeTaxRate / 100);
-        return { savings: netIncome - expenses };
+    function sellAssets(amountToRaise, btcLots, tradLots, strategy, taxRates, currentMonth) {
+        let cashRaised = 0, taxPaid = 0;
+        const btcSortFn = strategy === 'hifo' ? (a, b) => b.basis / b.amount - a.basis / a.amount : (a, b) => a.month - b.month;
+        btcLots.sort(btcSortFn);
+        const lotsToRemove = [];
+        for (let i = 0; i < btcLots.length; i++) {
+            if (cashRaised >= amountToRaise) break;
+            const lot = btcLots[i];
+            const gain = lot.amount - lot.basis;
+            const taxRate = (currentMonth - lot.month > 12) ? taxRates.lt : taxRates.st;
+            taxPaid += gain > 0 ? gain * taxRate : 0;
+            cashRaised += lot.amount;
+            lotsToRemove.push(i);
+        }
+        for (let i = lotsToRemove.length - 1; i >= 0; i--) btcLots.splice(lotsToRemove[i], 1);
+        return { cashRaised, taxPaid };
     }
     
     function analyzeTrajectories(trajectories, numSimulations, simulationYears) {
@@ -186,72 +143,59 @@ document.addEventListener('DOMContentLoaded', () => {
         return percentiles;
     }
 
-    function renderAllResults(mixedPercentiles, baseline, finalYearData) {
+    // --- RENDER FUNCTIONS ---
+    function renderResults(percentiles, inputs) {
         el('results').innerHTML = `
             <div><h2 class="text-2xl font-semibold mb-4 text-center">Net Worth Projection</h2><div class="bg-gray-700 p-4 rounded-lg"><canvas id="projectionChart"></canvas></div></div>
-            <div><h2 class="text-2xl font-semibold mb-4 text-center">Range of Final Net Worth Outcomes (Your Mixed Portfolio)</h2><div id="outcomeSummary" class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center"></div></div>
-            <div><h2 class="text-2xl font-semibold mb-4 text-center">Year-by-Year Breakdown (Median Outcome)</h2><div class="overflow-x-auto rounded-lg"><table class="min-w-full bg-gray-700"><thead class="bg-gray-600"><tr><th class="py-3 px-4 text-left">Year</th><th class="py-3 px-4 text-right font-mono">100% Traditional</th><th class="py-3 px-4 text-right font-mono">Your Mixed Portfolio</th><th class="py-3 px-4 text-right font-mono">Advantage</th></tr></thead><tbody id="projectionTableBody"></tbody></table></div></div>
+            <div><h2 class="text-2xl font-semibold mb-4 text-center">Range of Final Net Worth Outcomes</h2><div id="outcomeSummary" class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center"></div></div>
+            <div><h2 class="text-2xl font-semibold mb-4 text-center">Year-by-Year Breakdown (Median Outcome)</h2><div class="overflow-x-auto rounded-lg"><table class="min-w-full bg-gray-700"><thead class="bg-gray-600"><tr><th class="py-3 px-4 text-left">Year</th><th class="py-3 px-4 text-right font-mono">Total Net Worth</th></tr></thead><tbody id="projectionTableBody"></tbody></table></div></div>
             <div><h2 class="text-2xl font-semibold mb-4 text-center">Breakdown of Final Year (Median Outcome)</h2><div id="finalYearBreakdown" class="grid grid-cols-1 md:grid-cols-2 gap-6 bg-gray-700 p-6 rounded-lg"></div></div>
             <div><h2 class="text-2xl font-semibold mb-4 text-center">Share Your Scenario</h2><div class="flex gap-2"><input type="text" id="shareableLink" class="w-full bg-gray-600 rounded-md p-2 text-gray-300" readonly><button id="copyLinkBtn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg">Copy</button></div></div>
         `;
-        renderOutcomes(mixedPercentiles);
-        renderYearByYearTable(mixedPercentiles.p50, baseline);
-        renderFinalYearBreakdown(finalYearData);
-        renderChart(mixedPercentiles, baseline);
-        // Re-add event listener for the new copy button
+        renderOutcomes(percentiles);
+        renderYearByYearTable(percentiles.p50);
+        renderFinalYearBreakdown(percentiles.p50, inputs);
+        renderChart(percentiles);
         el('copyLinkBtn').addEventListener('click', () => {
             el('shareableLink').select();
             navigator.clipboard.writeText(el('shareableLink').value);
         });
     }
-
-    function renderOutcomes(mixedPercentiles) {
-        const finalP25 = mixedPercentiles.p25.slice(-1)[0];
-        const finalP50 = mixedPercentiles.p50.slice(-1)[0];
-        const finalP75 = mixedPercentiles.p75.slice(-1)[0];
+    
+    function renderOutcomes(percentiles) {
+        const finalP25 = percentiles.p25.slice(-1)[0];
+        const finalP50 = percentiles.p50.slice(-1)[0];
+        const finalP75 = percentiles.p75.slice(-1)[0];
         el('outcomeSummary').innerHTML = `<div class="bg-gray-700 p-4 rounded-lg"><p class="text-lg text-red-400">Poor Outcome (25th %)</p><p class="text-2xl font-bold">${formatter.format(finalP25)}</p></div><div class="bg-gray-700 p-4 rounded-lg"><p class="text-lg text-gray-300">Median Outcome (50th %)</p><p class="text-3xl font-bold text-orange-400">${formatter.format(finalP50)}</p></div><div class="bg-gray-700 p-4 rounded-lg"><p class="text-lg text-green-400">Good Outcome (75th %)</p><p class="text-2xl font-bold">${formatter.format(finalP75)}</p></div>`;
     }
 
-    function renderYearByYearTable(medianMixed, baseline) {
+    function renderYearByYearTable(median) {
         let tableHtml = '';
-        for (let i = 0; i < medianMixed.length; i++) {
-            tableHtml += `<tr class="border-b border-gray-600"><td class="py-2 px-4">${i + 1}</td><td class="py-2 px-4 text-right font-mono">${formatter.format(baseline[i])}</td><td class="py-2 px-4 text-right font-mono text-green-400">${formatter.format(medianMixed[i])}</td><td class="py-2 px-4 text-right font-mono text-orange-400">${formatter.format(medianMixed[i] - baseline[i])}</td></tr>`;
+        for (let i = 0; i < median.length; i++) {
+            tableHtml += `<tr class="border-b border-gray-600"><td class="py-2 px-4">${i + 1}</td><td class="py-2 px-4 text-right font-mono text-green-400">${formatter.format(median[i])}</td></tr>`;
         }
         el('projectionTableBody').innerHTML = tableHtml;
     }
-    
-    function renderFinalYearBreakdown(data) {
-        const { baseline, mixed } = data;
-        el('finalYearBreakdown').innerHTML = `
-            <div>
-                <h3 class="text-lg font-semibold text-gray-400">100% Traditional (Final Year)</h3>
-                <p>Starting Principal: <span class="font-mono float-right">${formatter.format(baseline.start)}</span></p>
-                <p>Annual Savings Added: <span class="font-mono float-right text-green-400">${formatter.format(baseline.savings)}</span></p>
-                <p>Investment Growth: <span class="font-mono float-right text-green-400">${formatter.format(baseline.growth)}</span></p>
-                <p class="font-semibold">Capital Gains Tax Paid: <span class="font-mono float-right text-red-400">${formatter.format(-baseline.tax)}</span></p>
-                <hr class="border-gray-500 my-2">
-                <p>Final Net Worth: <span class="font-mono float-right font-bold">${formatter.format(baseline.end)}</span></p>
-            </div>
-            <div>
-                <h3 class="text-lg font-semibold text-gray-400">Your Portfolio (Median Final Year)</h3>
-                <p>Starting Principal: <span class="font-mono float-right">${formatter.format(mixed.start)}</span></p>
-                <p>Net Savings Added: <span class="font-mono float-right text-green-400">${formatter.format(mixed.savings)}</span></p>
-                <p>Capital Gain (Approx.): <span class="font-mono float-right text-green-400">${formatter.format(mixed.growth)}</span></p>
-                <p class="font-semibold">Capital Gains Tax Paid (Approx.): <span class="font-mono float-right text-red-400">${formatter.format(-mixed.tax)}</span></p>
-                <hr class="border-gray-500 my-2">
-                <p>Final Net Worth: <span class="font-mono float-right font-bold text-orange-400">${formatter.format(mixed.end)}</span></p>
-            </div>`;
+
+    function renderFinalYearBreakdown(median, inputs) {
+        // Since we don't have a simple baseline anymore, this section can show portfolio composition
+        // This is a simplified placeholder, a more detailed implementation could be a future step
+        el('finalYearBreakdown').innerHTML = `<div class="col-span-2 text-center text-gray-400">A detailed final year breakdown for the new tax-harvesting model is a planned future enhancement.</div>`;
     }
 
-    function renderChart(mixedPercentiles, baseline) {
+    function renderChart(percentiles) {
         if (projectionChart) projectionChart.destroy();
-        const labels = Array.from({ length: baseline.length }, (_, i) => `Year ${i + 1}`);
-        projectionChart = new Chart(el('projectionChart').getContext('2d'), { type: 'line', data: { labels: labels, datasets: [ { label: '100% Traditional', data: baseline, borderColor: 'rgba(54, 162, 235, 1)', borderWidth: 2, fill: false }, { label: 'Your Portfolio (Median)', data: mixedPercentiles.p50, borderColor: 'rgba(242, 169, 0, 1)', borderWidth: 3, fill: false }, { label: 'Your Portfolio (25th-75th %)', data: mixedPercentiles.p25, borderColor: 'transparent', backgroundColor: 'rgba(242, 169, 0, 0.2)', pointRadius: 0, fill: '+1' }, { data: mixedPercentiles.p75, borderColor: 'transparent', backgroundColor: 'rgba(242, 169, 0, 0.2)', pointRadius: 0, fill: '-1' } ] }, options: { responsive: true, scales: { y: { beginAtZero: true, ticks: { color: '#fff' } }, x: { ticks: { color: '#fff' } } }, plugins: { legend: { labels: { color: '#fff' } } } } });
+        const labels = Array.from({ length: percentiles.p50.length }, (_, i) => `Year ${i + 1}`);
+        projectionChart = new Chart(el('projectionChart').getContext('2d'), {
+            type: 'line', data: { labels: labels, datasets: [ { label: 'Median Outcome', data: percentiles.p50, borderColor: 'rgba(242, 169, 0, 1)', borderWidth: 3, fill: false }, { label: '25th-75th Percentile', data: percentiles.p25, borderColor: 'transparent', backgroundColor: 'rgba(242, 169, 0, 0.2)', pointRadius: 0, fill: '+1' }, { data: percentiles.p75, borderColor: 'transparent', backgroundColor: 'rgba(242, 169, 0, 0.2)', pointRadius: 0, fill: '-1' } ] },
+            options: { responsive: true, scales: { y: { beginAtZero: true, ticks: { color: '#fff' } }, x: { ticks: { color: '#fff' } } }, plugins: { legend: { labels: { color: '#fff' } } } }
+        });
     }
 
+    // --- SHAREABLE LINK FUNCTIONS ---
     function generateShareableLink() {
         const params = new URLSearchParams();
-        inputIds.forEach(id => params.append(id, el(id).value));
+        inputIds.forEach(id => params.append(id, str(id)));
         el('shareableLink').value = `${window.location.origin}${window.location.pathname}?${params.toString()}`;
     }
 
@@ -263,9 +207,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     
+    // --- INIT ---
     el('calculateBtn').addEventListener('click', runSimulation);
-    // The copy button listener is re-added inside renderAllResults since that's where the element is created
-
     loadFromURL();
 });
 </script>
